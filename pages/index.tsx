@@ -59,8 +59,13 @@ export function BreadCrumb({pages}: BreadCrumbProps) {
                             isActive = true
 
                         return (
-                            <li className={isActive ? "is-active" : ""}>
-                                <Link className={isActive ? "has-text-black" : "has-text-grey"} href={"/" + page.toLocaleLowerCase()}>{page}</Link>
+                            <li key={index} className={isActive ? "is-active" : ""}>
+                                <Link 
+                                    className={isActive ? "has-text-black" : "has-text-grey"}
+                                    href={"/" + (page.toLocaleLowerCase() === "hempyre" ? "" : page.toLocaleLowerCase())}
+                                >
+                                    {page}
+                                </Link>
                             </li>
                         )
                     })}
@@ -90,7 +95,21 @@ export default function Home() {
             <HeadSettings title="Hempyre" />
             <header>
                 <NavBar />
-                <BreadCrumb pages={["Hempyre", "Shop", "D8-Carts"]}/>
+                <BreadCrumb pages={["Hempyre"]}/>
+                <section className="container">
+                    <section className="section">
+                        <span className="title">Introduction</span>
+                        <p>
+                            Hemp is one of the oldest plants know to mankind.
+                            For thousands of years, it was used in the production
+                            of fabrics, rope. And more specifically cannabis 
+                            a relaive of hemp, with higher levels of the compound delta9-thc 
+                            as a remedy for illness, both physical and mental. In modern times,
+                            governments have not been so kind to cannabis and hemp, with both
+                            being banned in most countries in the world. 
+                        </p>
+                    </section>
+                </section>
             </header>
         </main>
     )
