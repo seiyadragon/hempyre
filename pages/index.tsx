@@ -133,6 +133,22 @@ export default function Home() {
                             we like to know what we're putting in our bodies, and we believe <strong>YOU</strong> have the right to know too.
                         </p>
                     </section>
+                    <section className='section pt-1'>
+                        <span className='title'>[Disclaimer]</span>
+                        <p className='pl-4 pt-1'>
+                            All products sold on this site are intended <strong>only</strong> for 
+                            consumption
+                            by <strong>adults</strong> over <strong>21</strong> years of age,
+                            or <strong>legal smoking age</strong> in your <strong>
+                            place of recidence</strong>. Products have <strong>NOT</strong> been 
+                            <strong> evaluated</strong>, by the <strong>FDA</strong>, any recommendations
+                            made by us should be taken as an <strong>opinion</strong>, we are <strong>NOT</strong>
+                            <strong> doctors</strong>. All <strong>claims</strong> made by products are mearly
+                            anecdotal evidence. We <strong>encourage</strong> anyone who has doubts, 
+                            to do their own reasearch, and we can't <strong>encourage enough</strong> to
+                            seek <strong>advice</strong> from a <strong>medical professional</strong>.
+                        </p>
+                    </section>
                 </section>
             </header>
         </main>
