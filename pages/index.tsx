@@ -15,8 +15,8 @@ export function NavBar() {
         <nav className="navbar is-dark">
             <section className="navbar-brand">
                 <span className="navbar-item">
-                    <figure className='image is-128x64'>
-                        <Image src="/hempyre.png" width={128} height={64} alt="Logo Cannot be Loaded" style={{"maxHeight": "85px"}}/>
+                    <figure className='image is-3by3'>
+                        <Image src="/hempyre.png" width={128} height={128} alt="Logo Cannot be Loaded" style={{"maxHeight": "45px"}}/>
                     </figure>
                 </span>
                 <section className="navbar-burger" onClick={menuOnClick}>
@@ -46,12 +46,17 @@ export function NavBar() {
 }
 
 type BreadCrumbProps = {
-    pages: Array<string>
+    pages: Array<BreadCrumbPage>
+}
+
+type BreadCrumbPage = {
+    name: string,
+    link: string
 }
 
 export function BreadCrumb({pages}: BreadCrumbProps) {
     return (
-        <section className="section pt-4 pb-0">
+        <section className="section pt-4 pb-4">
             <nav className="breadcrumb has-arrow-separator">
                 <ul className="container is-size-6">
                     {pages != null && pages.map((page, index) => {
@@ -60,12 +65,9 @@ export function BreadCrumb({pages}: BreadCrumbProps) {
                             isActive = true
 
                         return (
-                            <li key={index} className={isActive ? "is-active" : ""}>
-                                <Link 
-                                    className={isActive ? "has-text-black" : "has-text-grey"}
-                                    href={"/" + (page.toLocaleLowerCase() === "hempyre" ? "" : page.toLocaleLowerCase())}
-                                >
-                                    {page}
+                            <li key={index} className={isActive ? "is-active is-size-5" : "is-size-5"}>
+                                <Link className={isActive ? "has-text-black" : "has-text-grey"} href={page.link.toString().toLocaleLowerCase()}>
+                                    {page.name}
                                 </Link>
                             </li>
                         )
@@ -96,9 +98,9 @@ export default function Home() {
             <HeadSettings title="Hempyre" />
             <header>
                 <NavBar />
-                <BreadCrumb pages={["Hempyre"]}/>
+                <BreadCrumb pages={[{name: "HemPyre", link: "/"}]}/>
                 <section className="container">
-                    <section className="section">
+                    <section className="section has-background-light">
                         <span className="title">[Introduction]</span>
                         <p className="pl-4 pt-1">
                             Hemp is one of the oldest plants known to mankind.
@@ -122,7 +124,7 @@ export default function Home() {
                             is <strong>hhc</strong>.
                         </p>
                     </section>
-                    <section className="section pt-1">
+                    <section className="section pt-1 has-background-light">
                         <span className="title">[Goals]</span>
                         <p className="pl-4 pt-1">
                             Our goals are simple. We want to bring <strong>YOU</strong> all the latest and safe hemp/cannabis products
@@ -133,7 +135,7 @@ export default function Home() {
                             we like to know what we're putting in our bodies, and we believe <strong>YOU</strong> have the right to know too.
                         </p>
                     </section>
-                    <section className='section pt-1'>
+                    <section className='section pt-1 has-background-light'>
                         <span className='title'>[Disclaimer]</span>
                         <p className='pl-4 pt-1'>
                             All products sold on this site are intended <strong>only</strong> for 

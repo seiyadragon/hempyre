@@ -4,4 +4,14 @@ const nextConfig = {
   swcMinify: true,
 }
 
-module.exports = nextConfig
+module.exports = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'knqniswvwblfgsnidcxv.supabase.co',
+        pathname: '/storage/v1/object/sign/product-images/**',
+      },
+    ],
+  },
+}
