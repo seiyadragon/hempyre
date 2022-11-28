@@ -5,7 +5,6 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { GetServerSideProps } from 'next';
 import { useState, MouseEvent } from 'react';
-import { parseJsonText } from 'typescript';
 
 type ProductProps = {
     product?: any
@@ -47,58 +46,69 @@ export default function Product({product}: ProductProps) {
         setCurrentFlavor(flavor)
     }
 
+    function onMainClick(event: MouseEvent<HTMLDivElement>) {
+        if (dropDownActive)
+            setDropDownActive(!dropDownActive)
+    }
+
+    function onAddToCartClick(event: MouseEvent<HTMLSpanElement>) {
+        
+    }
+
     return (
-        <main>
+        <main onClick={onMainClick}>
             <HeadSettings title="Shop"/>
             <NavBar />
-            <BreadCrumb pages={[{name: "HemPyre", link: "/"}, {name: "Shop", link: "/shop"}, {name: product.name, link: "/shop"}]}/>
+            <BreadCrumb pages={[{name: "HemPyre", link: "/"}, {name: "Shop", link: "/shop"}, {name: product.name, link: "/products" + product.name}]}/>
             <section className='container has-background-light'>
-                <section className='section columns'>
-                    <ul className='column is-2'>
+                <section className='section pt-0 mt-0 pb-0 mb-0'>
+                    <ul className='columns is-multiline is-mobile'>
                         {product.images.map((image: string) => {
                             return (
-                                <li key={image} className='image is-3by3 link mt-2 mb-2'>
+                                <li key={image} className='image is-3by3 link mt-1 mb-1 column is-2'>
                                     <Link 
                                         href={image}
                                         className= {
                                             image === displayImage ? 
-                                                'box pt-2 pb-2 pl-2 pr-2 has-background-dark'
+                                                'box pt-1 pb-1 pl-1 pr-1 has-background-success'
                                             :
-                                                'box pt-2 pb-2 pl-2 pr-2 has-background-white'
+                                                'box pt-1 pb-1 pl-1 pr-1 has-background-white'
                                         }
                                         onClick={(event: MouseEvent<HTMLAnchorElement>) => {
                                             onImageLinkClick(event, image)
                                         }}
                                     >
-                                        <Image src={image} alt="Cant Load Image!" width={256} height={256}/>
+                                        <Image src={image} alt="Cant Load Image!" width={512} height={512}/>
                                     </Link>
                                 </li>
                             )
                         })}
                     </ul>
-                    <section className='column is-half'>
-                        <figure className='image box is-3by3 mt-2'>
+                </section>
+                <section className='section columns mt-0 mb-0 pt-0 pb-0'>
+                    <section className='column is-half mt-0'>
+                        <figure className='image box is-3by3 mt-0'>
                             <Image src={displayImage} alt="Cant Load Image!" width={1024} height={1024} />
                         </figure>
                     </section>
                     <section className='column'>
-                        <p className='box mt-2'>{product.description}</p>
-                        <section className='box mt-2'>
-                            <section className={dropDownActive ? 'dropdown is-active' : 'dropdown'}>
-                                <button className='button' onClick={onDropDownClick}>Select your favorite flavor</button>
+                        <p className='box'>{product.description}</p>
+                        <section className='box'>
+                            <section className={dropDownActive ? 'dropdown is-active ml-7 mt-7' : 'dropdown ml-7 mr-7'}>
+                                <button className='button is-fullwidth' onClick={onDropDownClick}>{currentFlavor.name}</button>
                                 <section className='dropdown-menu'>
                                     <ul className='dropdown-content'>
                                         {product.flavors.map((flavor: any) => {
                                             return (
                                                 <li key={flavor.name}>
-                                                    <button
-                                                        className={flavor.name === currentFlavor ? 'dropdown-item button is-active is-primary' : 'dropdown-item button'}
+                                                    <section
+                                                        className={flavor.name === currentFlavor.name ? 'dropdown-item button is-active is-link' : 'dropdown-item button'}
                                                         onClick={(event: MouseEvent<HTMLButtonElement>) => {
                                                             onFlavorClick(event, flavor)
                                                         }}  
                                                     >
                                                         {flavor.name}
-                                                    </button>
+                                                    </section>
                                                 </li>
                                             )
                                         })}
@@ -106,13 +116,18 @@ export default function Product({product}: ProductProps) {
                                 </section>
                             </section>
                             <br/>
-                            <strong><span className='mt-1'>{currentFlavor.name}</span></strong>
                             <p className='pt-3'>{currentFlavor.description}</p>
                         </section>
+                        <section className='box'>
+                        <span className='is-size-4'>{"$" + product.price}</span>
+                        <section className='buttons is-right'>
+                            <span className='button is-success' onClick={onAddToCartClick}>Add To Cart!</span>
+                        </section>
+                    </section>
                     </section>
                 </section>
-                <section className='box mt-0 mb-0 ml-6 mr-6'>
-                    <span className='is-size-4'>{"$" + product.price}</span>
+                <section className='section'>
+                    
                 </section>
             </section>
         </main>

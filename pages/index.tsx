@@ -120,7 +120,7 @@ export default function Home() {
                             between it and <strong>delta-9-thc</strong>, as well as the <strong>delta-8 and 9-thc-o</strong> synthetic variants
                             which many people report success with, however to me it did not feel very strong, it was more calming like 
                             pure <strong>delta-8-thc</strong>. <strong>Delta-10-thc</strong> was in my opinion very similar to <strong>delta-8-thc</strong>,
-                            maybe a bit stronger, but I never used it as much as some of the others since my goto othern than <strong>delta-9-thc</strong>,
+                            maybe a bit stronger, but I never used it as much as some of the others since my go-to other than <strong>delta-9-thc</strong>,
                             is <strong>hhc</strong>.
                         </p>
                     </section>
