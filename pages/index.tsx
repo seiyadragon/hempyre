@@ -3,6 +3,8 @@ import Head from "next/head"
 import Link from "next/link";
 import Image from 'next/image'
 import {useState} from 'react'
+import { GetServerSideProps } from 'next';
+import { createClient, User } from '@supabase/supabase-js';
 
 export function NavBar() {
     let [isMenuActive, setMenuActive] = useState(false)
