@@ -5,6 +5,7 @@ import Image from 'next/image'
 import {useState} from 'react'
 import { GetServerSideProps } from 'next';
 import { createClient, User } from '@supabase/supabase-js';
+import { useCart } from 'react-use-cart';
 
 export function NavBar() {
     let [isMenuActive, setMenuActive] = useState(false)
@@ -96,7 +97,7 @@ export default function Home() {
         <main className="main">
             <HeadSettings title="Hempyre" />
             <header>
-                <NavBar />
+                <NavBar/>
                 <BreadCrumb pages={[{name: "HemPyre", link: "/"}]}/>
                 <section className="container">
                     <section className="section has-background-light">

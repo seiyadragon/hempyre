@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { GetServerSideProps } from 'next';
 import { useState, MouseEvent } from 'react';
+import { useCart } from 'react-use-cart';
 
 type ProductProps = {
     product?: any
@@ -51,8 +52,16 @@ export default function Product({product}: ProductProps) {
             setDropDownActive(!dropDownActive)
     }
 
+    const {addItem} = useCart()
+    let item = {
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        quantity: 1
+    }
+
     function onAddToCartClick(event: MouseEvent<HTMLSpanElement>) {
-        
+        addItem(item)
     }
 
     return (
