@@ -6,6 +6,7 @@ import Image from 'next/image'
 import { GetServerSideProps } from 'next';
 import { ChangeEvent, KeyboardEvent, useState } from 'react';
 import { useRouter } from 'next/router';
+import { useCart } from 'react-use-cart';
 
 export type ShopProps = {
     products: Array<any>,
@@ -38,6 +39,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 export default function Shop({products}: ShopProps) {
     let router = useRouter()
     let [searchBarValue, setSearchBarValue] = useState("")
+    const {addItem} = useCart()
 
     function onSearchBarChange(event: ChangeEvent<HTMLInputElement>) {
         setSearchBarValue(event.target.value)
@@ -85,6 +87,21 @@ export default function Shop({products}: ShopProps) {
                                         </section>
                                     </section>
                                 </Link>
+                                <span 
+                                    className='button is-primary is-fullwidth' 
+                                    onClick={function onButtonClick() {
+                                        let item = {
+                                            id: product.id,
+                                            name: product.name,
+                                            price: product.price,
+                                            quantity: 1
+                                        }
+
+                                        addItem(item)
+                                    }
+                                }>
+                                    Add to Cart
+                                </span>
                             </li>
                         )
                     })}

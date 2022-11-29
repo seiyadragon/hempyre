@@ -2,7 +2,7 @@ import 'bulma/css/bulma.min.css';
 import Head from "next/head"
 import Link from "next/link";
 import Image from 'next/image'
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import { GetServerSideProps } from 'next';
 import { createClient, User } from '@supabase/supabase-js';
 import { useCart } from 'react-use-cart';
@@ -13,6 +13,13 @@ export function NavBar() {
     function menuOnClick() {
         setMenuActive(!isMenuActive)
     }
+
+    const { totalUniqueItems } = useCart()
+    const [totalItems, setTotalItems] = useState(0)
+
+    useEffect(() => {
+        setTotalItems(totalUniqueItems)
+    })
 
     return (
         <nav className="navbar is-dark">
@@ -37,7 +44,7 @@ export function NavBar() {
                         <span>Shop</span>
                     </Link>
                     <Link href="/cart" className="navbar-item">
-                        <span>Cart</span>
+                        <span>Cart({totalItems})</span>
                     </Link>
                 </section>
             </section>
