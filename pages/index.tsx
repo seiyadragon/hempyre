@@ -35,9 +35,6 @@ export function NavBar() {
                     <Link href="/shop" className="navbar-item">
                         <span>Shop</span>
                     </Link>
-                    <Link href="/account" className="navbar-item">
-                        <span>Account</span>
-                    </Link>
                     <Link href="/cart" className="navbar-item">
                         <span>Cart</span>
                     </Link>
