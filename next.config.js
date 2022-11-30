@@ -13,5 +13,6 @@ module.exports = {
         pathname: '/storage/v1/object/sign/product-images/**',
       },
     ],
+    unoptimized: true
   },
 }

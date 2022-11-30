@@ -42,8 +42,7 @@ export default function Product({product}: ProductProps) {
         setDropDownActive(!dropDownActive)
     }
 
-    if (product.flavors != null) 
-        var [currentFlavor, setCurrentFlavor] = useState(product.flavors[0])
+    var [currentFlavor, setCurrentFlavor] = useState(product.flavors != null ? product.flavors[0] : "")
 
     function onFlavorClick(event: MouseEvent<HTMLButtonElement>, flavor: ProductFlavor) {
         setCurrentFlavor(flavor)
