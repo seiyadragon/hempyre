@@ -4,12 +4,13 @@ import { createClient, PostgrestResponse } from '@supabase/supabase-js'
 import Link from 'next/link'
 import Image from 'next/image'
 import { GetServerSideProps } from 'next';
-import { ChangeEvent, KeyboardEvent, useState } from 'react';
+import { ChangeEvent, KeyboardEvent, useState, MouseEvent, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useCart } from 'react-use-cart';
 
 export type ShopProps = {
     products: Array<any>,
+    categories: Array<string>
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
@@ -21,7 +22,19 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     let supabase = createClient(supabaseUrl, supabaseKey);
     let {data: products, error}: PostgrestResponse<any> = await supabase.from("Products").select();
 
-    console.log("Search Value:" + searchValue)
+    let storeCategories: Array<string> = []
+    products?.map((product) => {
+        product.categories.map((category: string) => {
+            let shouldAddToCategories = true
+            storeCategories.map((addedCategories) => {
+                if (addedCategories === category)
+                    shouldAddToCategories = false
+            })
+
+            if (shouldAddToCategories)
+                storeCategories.push(category)
+        })
+    })
 
     let filteredProducts: Array<any> = []
     products?.map((product) => {
@@ -31,15 +44,48 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
     return {
         props: {
-            products: filteredProducts
+            products: filteredProducts,
+            categories: storeCategories
         }
     }
 }
 
-export default function Shop({products}: ShopProps) {
+type CategoryProps = {
+    category: string,
+    selectedCategories: SelectedCategoriesArrayType
+}
+
+type SelectedCategoriesArrayType = {
+    selectedCategories: Array<string>,
+    setSelectedCategories: any
+}
+
+export function CategoryItem({category, selectedCategories}: CategoryProps) {
+    let [isSelected, setSelected] = useState(false)
+
+    function onCategoryClick(event: MouseEvent) {
+        if (!isSelected) {
+            selectedCategories.setSelectedCategories([...selectedCategories.selectedCategories, category])
+            setSelected(!isSelected)
+        }
+
+        if (isSelected) {
+            selectedCategories.selectedCategories.map((selectedCategory) => {
+                selectedCategories.setSelectedCategories(selectedCategories.selectedCategories.filter(category => category !== selectedCategory))
+            })
+            setSelected(!isSelected)
+        }
+    }
+
+    return <span className={isSelected ? 'tag ml-2 mr-2 is-dark' : 'tag ml-2 mr-2'} onClick={onCategoryClick}>{category}</span>
+}
+
+export default function Shop({products, categories}: ShopProps) {
     let router = useRouter()
     let [searchBarValue, setSearchBarValue] = useState("")
     const {addItem} = useCart()
+
+    let [selectedCategories, setSelectedCategories] = useState(Array<string>)
 
     function onSearchBarChange(event: ChangeEvent<HTMLInputElement>) {
         setSearchBarValue(event.target.value)
@@ -50,6 +96,8 @@ export default function Shop({products}: ShopProps) {
             router.push("/shop?search=" + searchBarValue)
         }
     }
+
+    console.log(selectedCategories)
 
     return(
         <main>
@@ -67,20 +115,34 @@ export default function Shop({products}: ShopProps) {
                         onChange={onSearchBarChange}
                         onKeyDown={onSearchBarKeyDown}
                     />
+                    <ul className='tags mt-2'>
+                        {categories.map((category) => {
+                            return <li key={category}><CategoryItem category={category} selectedCategories={{selectedCategories, setSelectedCategories}}/></li>
+                        })}
+                    </ul>
                 </section>
                 <ul className='section columns'>
                     {products.map((product) => {
+                        let shouldRender = false
+
+                        if (selectedCategories.length > 0)
+                            selectedCategories.map((selectedCategory) => {
+                                product.categories.map((productCategory: string) => {
+                                    if (selectedCategory === productCategory)
+                                        shouldRender = true
+                                })
+                            })
+                        else shouldRender = true
+
                         return (
-                            <li key={product.id} className='column is-2'>
+                            shouldRender && <li key={product.id} className='column is-2'>
                                 <Link href={"/products/" + product.name}>
                                     <section className='card has-shadow'>
-                                        <section className='card-header is-white'>
-                                            <span className='card-header-title has-text-centered'>{product.name}</span>
+                                        <section className='card-header is-white has-shadow' style={{"minHeight": "70px"}}>
+                                            <span className='card-header-title is-centered has-text-centered'>{product.name}</span>
                                         </section>
-                                        <section className='card-image is-white'>
-                                            <figure className='image is-3by3'>
-                                                <Image src={product.images[0]} alt="Image not found!" width={256} height={256}/>
-                                            </figure>
+                                        <section className='card-image is-white pt-1'>
+                                            <Image src={product.images[0]} alt="Image not found!" width={256} height={256}/>
                                         </section>
                                         <section className='card-footer is-white'>
                                             <span className='card-footer-item'>{"$" + product.price}</span>
