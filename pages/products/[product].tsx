@@ -42,7 +42,9 @@ export default function Product({product}: ProductProps) {
         setDropDownActive(!dropDownActive)
     }
 
-    let [currentFlavor, setCurrentFlavor] = useState(product.flavors[0])
+    if (product.flavors != null) 
+        var [currentFlavor, setCurrentFlavor] = useState(product.flavors[0])
+
     function onFlavorClick(event: MouseEvent<HTMLButtonElement>, flavor: ProductFlavor) {
         setCurrentFlavor(flavor)
     }
@@ -102,31 +104,33 @@ export default function Product({product}: ProductProps) {
                     </section>
                     <section className='column'>
                         <p className='box'>{product.description}</p>
-                        <section className='box'>
-                            <section className={dropDownActive ? 'dropdown is-active ml-7 mt-7' : 'dropdown ml-7 mr-7'}>
-                                <button className='button is-fullwidth' onClick={onDropDownClick}>{currentFlavor.name}</button>
-                                <section className='dropdown-menu'>
-                                    <ul className='dropdown-content'>
-                                        {product.flavors.map((flavor: any) => {
-                                            return (
-                                                <li key={flavor.name}>
-                                                    <section
-                                                        className={flavor.name === currentFlavor.name ? 'dropdown-item button is-active is-link' : 'dropdown-item button'}
-                                                        onClick={(event: MouseEvent<HTMLButtonElement>) => {
-                                                            onFlavorClick(event, flavor)
-                                                        }}  
-                                                    >
-                                                        {flavor.name}
-                                                    </section>
-                                                </li>
-                                            )
-                                        })}
-                                    </ul>
+                        { product.flavors != null &&
+                            <section className='box'>
+                                <section className={dropDownActive ? 'dropdown is-active ml-7 mt-7' : 'dropdown ml-7 mr-7'}>
+                                    <button className='button is-fullwidth' onClick={onDropDownClick}>{currentFlavor.name}</button>
+                                    <section className='dropdown-menu'>
+                                        <ul className='dropdown-content'>
+                                            {product.flavors.map((flavor: any) => {
+                                                return (
+                                                    <li key={flavor.name}>
+                                                        <section
+                                                            className={flavor.name === currentFlavor.name ? 'dropdown-item button is-active is-link' : 'dropdown-item button'}
+                                                            onClick={(event: MouseEvent<HTMLButtonElement>) => {
+                                                                onFlavorClick(event, flavor)
+                                                            }}  
+                                                        >
+                                                            {flavor.name}
+                                                        </section>
+                                                    </li>
+                                                )
+                                            })}
+                                        </ul>
+                                    </section>
                                 </section>
+                                <br/>
+                                <p className='pt-3'>{currentFlavor.description}</p>
                             </section>
-                            <br/>
-                            <p className='pt-3'>{currentFlavor.description}</p>
-                        </section>
+                        }
                         <section className='box'>
                         <span className='is-size-4'>{"$" + product.price}</span>
                         <section className='buttons is-right'>
