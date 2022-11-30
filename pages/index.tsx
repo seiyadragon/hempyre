@@ -19,7 +19,7 @@ export function NavBar() {
 
     useEffect(() => {
         setTotalItems(totalUniqueItems)
-    })
+    }, [totalUniqueItems])
 
     return (
         <nav className="navbar is-dark">
@@ -112,7 +112,7 @@ export default function Home() {
                         <p className="pl-4 pt-1">
                             Hemp is one of the oldest plants known to mankind.
                             For thousands of years, it was used in the production
-                            of fabrics, and rope. And it's cousin cannabis 
+                            of fabrics, and rope. And its cousin cannabis 
                             containing naturally higher levels of the psychoactive compound <strong>delta-9-thc</strong> was 
                             used as a remedy for illness, both physical and mental. In modern times,
                             governments have not been so kind to cannabis and hemp, with both
@@ -139,7 +139,7 @@ export default function Home() {
                             that are currently legal in all 50 states for the best price we can afford. We also
                             put a lot of effort into reasearch for all our products to make sure <strong>YOU</strong>,
                             have access to all the information available about our products. Here at <strong>HempPyre</strong>,
-                            we like to know what we're putting in our bodies, and we believe <strong>YOU</strong> have the right to know too.
+                            we like to know what {"we\'re"} putting in our bodies, and we believe <strong>YOU</strong> have the right to know too.
                         </p>
                     </section>
                     <section className='section pt-1 has-background-light'>
@@ -154,7 +154,7 @@ export default function Home() {
                             made by us should be taken as an <strong>opinion</strong>, we are <strong>NOT</strong>
                             <strong> doctors</strong>. All <strong>claims</strong> made by products are mearly
                             anecdotal evidence. We <strong>encourage</strong> anyone who has doubts, 
-                            to do their own reasearch, and we can't <strong>encourage enough</strong> to
+                            to do their own reasearch, and we cannot <strong>encourage enough</strong> to
                             seek <strong>advice</strong> from a <strong>medical professional</strong>.
                         </p>
                     </section>

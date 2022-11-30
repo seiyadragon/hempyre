@@ -71,7 +71,7 @@ export default function Cart({products}: CartProps) {
     useEffect(() => {
         setHydratedItems(items)
         setCartTotal(cartTotal)
-    })
+    }, [items, cartTotal])
 
     function onCheckOutClick(event: MouseEvent) {
         
