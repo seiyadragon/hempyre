@@ -102,8 +102,8 @@ export function HeadSettings({title}: HeadSettingsProps) {
 export default function Home() {
     return (
         <main className="main">
-            <HeadSettings title="Hempyre" />
-            <header>
+            <section style={{"backgroundColor": "rbg(0, 0, 0, 0)"}}>
+                <HeadSettings title="Hempyre" />
                 <NavBar/>
                 <BreadCrumb pages={[{name: "HemPyre", link: "/"}]}/>
                 <section className="container">
@@ -136,30 +136,31 @@ export default function Home() {
                         <p className="pl-4 pt-1">
                             Our goals are simple. We want to bring <strong>YOU</strong> all the latest and safe hemp/cannabis products
                             currently available in the market,
-                            that are currently legal in all 50 states for the best price we can afford. We also
+                            that are currently legal in <strong>The United States</strong> for the best price we can afford. We also
                             put a lot of effort into reasearch for all our products to make sure <strong>YOU</strong>,
                             have access to all the information available about our products. Here at <strong>HempPyre</strong>,
                             we like to know what {"we\'re"} putting in our bodies, and we believe <strong>YOU</strong> have the right to know too.
                         </p>
                     </section>
                     <section className='section pt-1 has-background-light'>
-                        <span className='title'>[Disclaimer]</span>
+                        <span className='title'>[FDA Disclaimer]</span>
                         <p className='pl-4 pt-1'>
-                            All products sold on this site are intended <strong>only</strong> for 
-                            consumption
-                            by <strong>adults</strong> over <strong>21</strong> years of age,
-                            or <strong>legal smoking age</strong> in your <strong>
-                            place of recidence</strong>. Products have <strong>NOT</strong> been 
-                            <strong> evaluated</strong>, by the <strong>FDA</strong>, any recommendations
-                            made by us should be taken as an <strong>opinion</strong>, we are <strong>NOT</strong>
-                            <strong> doctors</strong>. All <strong>claims</strong> made by products are mearly
-                            anecdotal evidence. We <strong>encourage</strong> anyone who has doubts, 
-                            to do their own reasearch, and we cannot <strong>encourage enough</strong> to
-                            seek <strong>advice</strong> from a <strong>medical professional</strong>.
+                            <strong>
+                                This product is not for use by or sale to persons under the age of 18 or 21 depending on the laws of your governing state or territory. 
+                                The statements made regarding these products have not been evaluated by the Food and Drug Administration. 
+                                The efficacy of these products has not been confirmed by FDA-approved research. 
+                                These products are not intended to diagnose, treat, cure or prevent any disease. 
+                                All information from health care practitioners. 
+                                Please consult your healthcare professional about potential interactions or other possible complications before using any product. 
+                                The Federal Food, Drug, and Cosmetic Act require this notice. 
+                                By using this site you agree to follow the Privacy Policy and all Terms & Conditions printed on this site. 
+                                Void Where Prohibited By Law. 
+                                Derived from 100% Legal USA Hemp and contains less than 0.3% Delta-9 THC in accordance with the 2018 Farm Bill.
+                            </strong>
                         </p>
                     </section>
                 </section>
-            </header>
+            </section>
         </main>
     )
 }
