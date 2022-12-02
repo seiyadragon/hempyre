@@ -9,7 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@ecwid/nextjs-ecwid-plugin": "^0.1.1",
     "@supabase/supabase-js": "^2.1.1",
     "@types/node": "18.11.9",
     "@types/react": "18.0.25",
@@ -22,7 +21,6 @@
     "react-dom": "18.2.0",
     "react-icons": "^4.6.0",
     "react-use-cart": "^1.13.0",
-    "typescript": "4.9.3",
-    "typescript-cookie": "^1.0.4"
+    "typescript": "4.9.3"
   }
 }

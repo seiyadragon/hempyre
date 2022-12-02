@@ -7,7 +7,6 @@ import { GetServerSideProps } from 'next';
 import { ChangeEvent, KeyboardEvent, useState, MouseEvent, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useCart } from 'react-use-cart';
-import { ProductBrowser } from '@ecwid/nextjs-ecwid-plugin'
 
 export type ShopProps = {
     products: Array<any>,
@@ -105,7 +104,6 @@ export default function Shop({products, categories}: ShopProps) {
             <HeadSettings title="Shop"/>
             <NavBar />
             <BreadCrumb pages={[{name: "HemPyre", link: "/"}, {name: "Shop", link: "/shop"}]}/>
-            <ProductBrowser
             <section className='container has-background-light'>
                 <section className='section pb-0 mb-0'>
                     <span className='title'>Shop</span>
